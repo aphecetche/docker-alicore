@@ -31,7 +31,7 @@ RUN yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.n
         zeromq-devel \
         texinfo \
         swig \
-        python-devel
+        python-devel \
         xorg-x11-fonts-Type1 \
         doxygen \
         && yum remove -y pyparsing

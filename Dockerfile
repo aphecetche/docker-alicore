@@ -1,27 +1,59 @@
 FROM centos:7.2.1511
 
-RUN yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm && \
-    yum install -y https://ecsft.cern.ch/dist/cvmfs/cvmfs-release/cvmfs-release-latest.noarch.rpm && \
-        yum update -y && \
-        yum install -y git gettext-devel cmake3 \
-        make wget which gcc gcc-c++ libtool automake autoconf zip \
-        exinfo bison flex openssl-devel \
-        libxml2-devel swig perl-ExtUtils-Embed \
+RUN yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm \
+        && yum update -y \
+        && yum install -y \
+        python2-pip \
+        git \
+        which \
+        cmake \
+        gcc-g++ \
+        gcc-c++ \
+        gcc-gfortran \
         environment-modules \
-        libX11-devel mesa-libGLU-devel libXpm-devel libXft-devel \
-        gcc-gfortran bzip2 bzip2-devel python-pip tmux screen \
-        ncurses-devel texinfo python-devel \
+        ncurses-devel \
+        libX11-devel \
+        cmake3 \
+        bzip2-devel \
+        libxml2-devel \
+        mesa-libGLU-devel \
+        openssl-devel \
+        bison \
+        flex \
+        libtool automake autoconf \
+        libXft-devel \
+        libXpm-devel \
+        perl-ExtUtils-Embed \
+        gettext-devel \
+        libpng-devel \
+        yaml-cpp-devel \
+        boost-devel \
+        zeromq-devel \
+        texinfo \
+        swig \
+        python-devel
         xorg-x11-fonts-Type1 \
+        doxygen \
+        && yum remove -y pyparsing
+
+RUN pip install --upgrade pip \
+        && pip install matplotlib \
+        certifi \
+        ipython \
+        pyparsing==2.1.10 \
+        ipywidgets \
+        ipykernel \
+        metakernel \
+        alibuild==1.4.0
+
+RUN  yum install -y https://ecsft.cern.ch/dist/cvmfs/cvmfs-release/cvmfs-release-latest.noarch.rpm && \
+        yum update -y && \
         cvmfs cvmfs-config-default \
-        doxygen
-
-RUN pip install alibuild==1.4.0
-
-RUN yum install -y libpng-devel yaml-cpp-devel
 
 RUN mkdir -p /cvmfs/alice.cern.ch /cvmfs/alice-ocdb.cern.ch
 
 COPY bashrc /root/.bashrc
+
 COPY etc-cvmfs-default-local /etc/cvmfs/default.local
 
 COPY cvmfs-startup.sh /cvmfs-startup.sh

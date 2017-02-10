@@ -47,8 +47,7 @@ RUN pip install --upgrade pip \
         alibuild==1.4.0
 
 RUN  yum install -y https://ecsft.cern.ch/dist/cvmfs/cvmfs-release/cvmfs-release-latest.noarch.rpm && \
-        yum update -y && \
-        cvmfs cvmfs-config-default \
+        yum update -y cvmfs cvmfs-config-default
 
 RUN mkdir -p /cvmfs/alice.cern.ch /cvmfs/alice-ocdb.cern.ch
 

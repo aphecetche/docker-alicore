@@ -15,21 +15,18 @@ RUN yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.n
         xorg-x11-fonts-Type1 \
         cvmfs cvmfs-config-default \
         doxygen \
-        devtoolset-6 rh-git29
+        devtoolset-6 rh-git29 \
+        libpng-devel yaml-cpp-devel
 
-# RUN ln -s /usr/bin/cmake3 /usr/bin/cmake && \
-#     ln -s /usr/bin/ctest3 /usr/bin/ctest && \
-#         cd /tmp && \
-#         curl -O http://mirror.ibcp.fr/pub/gnu/gsl/gsl-1.16.tar.gz && \
-#         tar -zvxf gsl-1.16.tar.gz && \
-#         cd gsl-1.16 && \
-#         ./configure && \
-#         make && make install && \
-#         rm -rf /tmp/gsl* 
-        
-RUN pip install alibuild
-
-RUN yum install -y libpng-devel yaml-cpp-devel
+RUN cd /tmp && \
+curl -O https://cmake.org/files/v3.8/cmake-3.8.2.tar.gz && \
+tar -zvxf cmake-3.8.2.tar.gz && \
+cd cmake-3.8.2 && \
+./configure && \
+make && make install && \
+pip install --upgrade pip && pip install matplotlib numpy certifi ipython ipywidgets ipykernel notebook metakernel pyyaml && \
+yum install -y python-requests python-pip python-devel curl-devel \
+alibuild
 
 RUN mkdir -p /cvmfs/alice.cern.ch /cvmfs/alice-ocdb.cern.ch
 

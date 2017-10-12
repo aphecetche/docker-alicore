@@ -16,7 +16,8 @@ RUN yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.n
         cvmfs cvmfs-config-default \
         doxygen \
         devtoolset-6 rh-git29 \
-        libpng-devel yaml-cpp-devel
+        libpng-devel yaml-cpp-devel \
+        python-requests python-pip python-devel curl-devel
 
 RUN cd /tmp && \
 curl -O https://cmake.org/files/v3.8/cmake-3.8.2.tar.gz && \
@@ -24,9 +25,7 @@ tar -zvxf cmake-3.8.2.tar.gz && \
 cd cmake-3.8.2 && \
 ./configure && \
 make && make install && \
-pip install --upgrade pip && pip install matplotlib numpy certifi ipython ipywidgets ipykernel notebook metakernel pyyaml && \
-yum install -y python-requests python-pip python-devel curl-devel \
-alibuild
+pip install --upgrade pip && pip install matplotlib numpy certifi ipython ipywidgets ipykernel notebook metakernel pyyaml alibuild
 
 RUN mkdir -p /cvmfs/alice.cern.ch /cvmfs/alice-ocdb.cern.ch
 

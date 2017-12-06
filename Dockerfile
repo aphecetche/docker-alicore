@@ -18,7 +18,8 @@ RUN yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.n
         devtoolset-6 rh-git29 \
         libpng-devel yaml-cpp-devel \
         python-requests python-pip python-devel curl-devel \
-        vim
+        vim \
+        mariadb-devel
 
 RUN cd /tmp && \
 curl -O https://cmake.org/files/v3.8/cmake-3.8.2.tar.gz && \

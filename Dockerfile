@@ -1,7 +1,6 @@
 FROM centos:7 
 
 RUN yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm && \
-    yum install -y https://ecsft.cern.ch/dist/cvmfs/cvmfs-release/cvmfs-release-latest.noarch.rpm && \
     yum install -y centos-release-scl && \
         yum update -y && \
         yum install -y git gettext-devel cmake3 \
@@ -13,7 +12,6 @@ RUN yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.n
         gcc-gfortran bzip2 bzip2-devel python-pip tmux screen \
         ncurses-devel texinfo python-devel \
         xorg-x11-fonts-Type1 \
-        cvmfs cvmfs-config-default \
         doxygen \
         devtoolset-6 rh-git29 \
         libpng-devel yaml-cpp-devel \
@@ -29,13 +27,7 @@ cd cmake-3.8.2 && \
 make && make install && \
 pip install --upgrade pip && pip install matplotlib numpy certifi ipython ipywidgets ipykernel notebook metakernel pyyaml alibuild
 
-RUN mkdir -p /cvmfs/alice.cern.ch /cvmfs/alice-ocdb.cern.ch
-
 COPY bashrc /root/.bashrc
-COPY etc-cvmfs-default-local /etc/cvmfs/default.local
 
-COPY cvmfs-startup.sh /cvmfs-startup.sh
-
-RUN chmod +x /cvmfs-startup.sh
 
 

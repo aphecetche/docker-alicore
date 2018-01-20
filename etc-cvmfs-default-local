@@ -1,2 +1,0 @@
-CVMFS_REPOSITORIES=alice.cern.ch,alice-ocdb.cern.ch
-CVMFS_HTTP_PROXY=DIRECT

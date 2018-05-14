@@ -23,9 +23,8 @@ RUN yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.n
     tar -zvxf haskell-platform-8.4.2-unknown-posix--core-x86_64.tar.gz && \
     . ./install-haskell-platform.sh && \
     cabal update && \
-    cabal install shake --global && \
+    cabal install shake --symlink-bindir=/usr/local/bin && \
     rm -f *.tar.gz install-has*.sh
-
 
 COPY bashrc /root/.bashrc
 

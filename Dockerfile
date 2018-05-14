@@ -12,13 +12,20 @@ RUN yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.n
     libXft-devel libxml2 libxml2-devel motif motif-devel kernel-devel \
     pciutils-devel kmod-devel bison flex perl-ExtUtils-Embed environment-modules && \
     yum install -y \
-    doxygen vim devtoolset-6 rh-git29 mariadb-devel perf && \
+    doxygen vim devtoolset-6 rh-git29 mariadb-devel perf gmp-devel && \
     curl -o /tmp/get-pip.py https://bootstrap.pypa.io/get-pip.py && \
     python /tmp/get-pip.py && \
     pip install matplotlib==2.0.2 numpy certifi ipython==5.1.0 ipywidgets \
     ipykernel notebook metakernel pyyaml alibuild && \
     rm -f /etc/profile.d/modules* && \
-    ln -si /usr/share/Modules/init/sh /etc/profile.d/modules.sh
+    ln -si /usr/share/Modules/init/sh /etc/profile.d/modules.sh && \
+    curl -OL https://www.haskell.org/platform/download/8.4.2/haskell-platform-8.4.2-unknown-posix--core-x86_64.tar.gz && \
+    tar -zvxf haskell-platform-8.4.2-unknown-posix--core-x86_64.tar.gz && \
+    . ./install-haskell-platform.sh && \
+    cabal update && \
+    cabal install shake --global && \
+    rm -f *.tar.gz install-has*.sh
+
 
 COPY bashrc /root/.bashrc
 

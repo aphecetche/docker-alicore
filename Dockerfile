@@ -18,13 +18,13 @@ RUN yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.n
     pip install matplotlib==2.0.2 numpy certifi ipython==5.1.0 ipywidgets \
     ipykernel notebook metakernel pyyaml alibuild && \
     rm -f /etc/profile.d/modules* && \
-    ln -si /usr/share/Modules/init/sh /etc/profile.d/modules.sh && \
-    curl -OL https://www.haskell.org/platform/download/8.4.2/haskell-platform-8.4.2-unknown-posix--core-x86_64.tar.gz && \
+    ln -si /usr/share/Modules/init/sh /etc/profile.d/modules.sh
+
+RUN curl -OL https://www.haskell.org/platform/download/8.4.2/haskell-platform-8.4.2-unknown-posix--core-x86_64.tar.gz && \
     tar -zvxf haskell-platform-8.4.2-unknown-posix--core-x86_64.tar.gz && \
     . ./install-haskell-platform.sh && \
-    cabal update && \
-    cabal install shake --symlink-bindir=/usr/local/bin && \
-    rm -f *.tar.gz install-has*.sh
+    rm -rf *.tar.gz install-has*
+
 
 COPY bashrc /root/.bashrc
 
